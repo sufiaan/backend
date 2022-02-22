@@ -8,30 +8,36 @@ let livingArrangementSchema = new Schema({
         default: uuid.v1
     },
     livingArrangement: {
-        type: Number,
-        required: true
+            renting:{
+                type:Object,
+                required:true
+            },
+            OwnerHouseOrTrailor:{
+                type:Object,
+                required:true
+            },
+            FriendsOrFamily:{
+                type:Object,
+                required:true
+            },
+            ShelterOrHotel:{
+                type:Object,
+                required:true
+            },
+            CarOrTent:{
+                type:Object,
+                required:true
+            },
+            TravelingThrough:{
+                type:Object,
+                required:true
+            },
+            race:{
+                type:Array,
+                required:false
+            },
+        }
     },
-    hasHealthInsurance:{
-        type: Boolean,
-        required:true
-    },
-    healthInsuranceProgram:{
-        type: String,
-        required:false
-    },
-    hasFoodStamps:{
-        type: Boolean,
-        required:true
-    },
-    foodStampsReason:{
-        type: Array,
-        required:false
-    },
-    modifyAt:{
-        type:null,
-        required:false
-    }
-},
     {
         collection: 'livingArrangement'
     });
