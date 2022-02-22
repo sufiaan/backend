@@ -2,43 +2,35 @@ const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let livingArrangementSchema = new Schema({
+let EmploymentStatusSchema = new Schema({
     _id: {
         type: String,
         default: uuid.v1
     },
-    livingArrangement: {
-            renting:{
+    employmentStatus: {
+            Employed:{
                 type:Object,
                 required:true
             },
-            OwnerHouseOrTrailor:{
+            Unemployed:{
                 type:Object,
                 required:true
             },
-            FriendsOrFamily:{
+            Retired:{
                 type:Object,
                 required:true
             },
-            ShelterOrHotel:{
-                type:Object,
-                required:true
-            },
-            CarOrTent:{
-                type:Object,
-                required:true
-            },
-            TravelingThrough:{
+            Housewife:{
                 type:Object,
                 required:true
             }
         }
     },
     {
-        collection: 'livingArrangement'
+        collection: 'EmploymentStatus'
     });
     
-module.exports = mongoose.model('livingArrangement', livingArrangementSchema)
+module.exports = mongoose.model('EmploymentStatus', EmploymentStatusSchema)
 
 // Designation:
 // 1. clientID: Number (Link the activity to client)

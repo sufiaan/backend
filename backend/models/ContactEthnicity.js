@@ -2,43 +2,39 @@ const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let livingArrangementSchema = new Schema({
+let ContactEthnicitySchema = new Schema({
     _id: {
         type: String,
         default: uuid.v1
     },
-    livingArrangement: {
-            renting:{
+    ethnicity: {
+            HispanicOrLatino:{
                 type:Object,
                 required:true
             },
-            OwnerHouseOrTrailor:{
+            WhiteOrNonLatino:{
                 type:Object,
                 required:true
             },
-            FriendsOrFamily:{
+            AfricanAmerican:{
                 type:Object,
                 required:true
             },
-            ShelterOrHotel:{
+            Asian:{
                 type:Object,
                 required:true
             },
-            CarOrTent:{
-                type:Object,
-                required:true
-            },
-            TravelingThrough:{
+            Other:{
                 type:Object,
                 required:true
             }
         }
     },
     {
-        collection: 'livingArrangement'
+        collection: 'ContactEthnicity'
     });
     
-module.exports = mongoose.model('livingArrangement', livingArrangementSchema)
+module.exports = mongoose.model('ContactEthnicity', ContactEthnicitySchema)
 
 // Designation:
 // 1. clientID: Number (Link the activity to client)
