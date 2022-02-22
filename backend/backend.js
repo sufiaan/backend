@@ -1,115 +1,70 @@
-// Example code for using native Javascript Mongo client
+// import/load the express library
 const express = require('express')
-const cors = require('cors');
-const MongoClient = require('mongodb').MongoClient;
 
-const app = express();
-const port = 3000;
+// create an instance of an express application
+const app = express()
 
-app.use(cors());
+//define what port to listen on
+const port = 3000
+const mongoose = require("mongoose");  // Require mongoose library
+//Adding better logging functionality
+const morgan = require("morgan");
+//In the production systems, we should not hardcode the sensitive data like API Keys, 
+//Secret Tokens, etc directly within the codebase (based on the Twelve factor App method). 
+// We will pass them as environment variables. This module helps us to load environment variables from a .env file into process.env
+require("dotenv").config();   // Require the dotenv
 
-// Configuring express middleware
-// helps us decode the body from an HTTP request (this is called body-parser)
-// What the body-parser middleware will be doing is grabbing the HTTP body, decoding the information,
-// and appending it to the req.body. From there, we can easily retrieve the information from a request.
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// setting up mongoose DB connection
+mongoose
+  .connect(process.env.MONGO_URL)   // read environment varibale from .env
+  .then(() => {
+    console.log("Database connection Success!");
+  })
+  .catch((err) => {
+    console.error("Mongo Connection Error", err);
+  });
 
-//will hold our handle to the DB connection
-let studentsDB;
+const PORT = process.env.PORT || 3000; //Declare the port number
 
-let connectionString = `mongodb://localhost:27017/StudentRecords`
+app.use(express.json()); //allows us to access request body as req.body
+app.use(morgan("dev"));  //enable incoming request logging in dev mode
 
-MongoClient.connect(
-    connectionString,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    function (err, client) {
-        studentsDB = client.db();
-        app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
-    }
-);
 
-// create an endpoint that will insert a student into a DB
-app.post('/student', (req, res) => {
-    //store the request body into a variable
-    const student = req.body;
+//default route
+app.get('/', (req, res) => {
+  //we will send a string back
+  res.send('Welcome to CIS 4339')
+})
 
-    // Output the student data to the console for debugging
-    console.log(student);
 
-    // create a new document in the students collection
-    studentsDB.collection('students').insertOne(req.body, function (err, info) {
-        // some more debugging info
-        console.log(err);
-        console.log(info);
-        res.send('Student is added to the database');
-    });
+// add on
+app.route('/Node').get(function(req,res)
+{
+    res.send("Tutorial on Node");
 });
-
+app.route('/Vue').get(function(req,res)
+{
+    res.send("Tutorial on Vue");
+});
 
 //create an endpoint to get all students from the API
 app.get('/students', (req, res) => {
-    // getting all the data from the collection students
-    studentsDB.collection('students').find().toArray(function (err, items) {
-       //print items to console
-        console.log(items);
+    res.json(students);
 
-//Optional:
-//     // sort matched documents in descending order by studentID
-//     studentsDB.collection('students').find().sort({studentID: -1}).toArray(function (err, items) {
-//     // Include only the `firstName` and `lastName` fields in the returned document
-//     studentsDB.collection('students').find().project({firstName:1 , lastName : 1}).toArray(function (err, items) {
-//   };
-        res.json(items);
-    });
+    //check results at https://jsonformatter.org/
 });
 
-// retrieving student by studentID
+//retrieving student by studentID
 // adding the : to the route path we can define a variable
 app.get('/student/:id', (req, res) => {
     // Reading id from the URL
-    const id = parseInt(req.params.id);
-    console.log(typeof id);
-
-    // Searching students for the id use find or findOne
-    studentsDB.collection('students').findOne({studentID: id}, function (err, item) {
-        if (err) {
-            // Sending 500 when not found something is a good practice
-            res.status(500).send('error occured');
-        }
-
-        if (item === null) {
-            // Sending 404 when not found something is a good practice
-            res.status(404).send('Student not found');
-        } else {
-            res.json(item);
-        }
-    });
-});
-
-//delete a student by id
-app.delete('/student/:id', (req, res) => {
-    // Reading id from the URL
     const id = req.params.id;
-
-    // Remove item student ID
-    studentsDB.collection('students').deleteOne(
-        { studentID: id },
-        function () {
-            res.send('Successfully deleted!')
+    console.log(id);
+    // Searching students for the id
+    for (let student of students) {
+        if (student.id === id) {
+            res.json(student);
+            return;
         }
-    )
-});
-
-// Updating - editing a student - we want to use PUT
-app.put('/student/:id', (req, res) => {
-    // Reading id from the URL
-    const id = parseInt(req.params.id);
-
-    // updating a student by it's ID and new data
-    studentsDB.collection('students').findOneAndUpdate({ studentID: id },
-        { $set: req.body }, function () {
-            res.send('Student is edited via PUT');
-        }
-    )
+    }
 });
