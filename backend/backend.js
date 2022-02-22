@@ -3,9 +3,8 @@ const express = require('express')
 
 // create an instance of an express application
 const app = express()
-
+const port = 8080;
 //define what port to listen on
-const port = 3000
 const mongoose = require("mongoose");  // Require mongoose library
 //Adding better logging functionality
 const morgan = require("morgan");
@@ -19,12 +18,13 @@ mongoose
   .connect(process.env.MONGO_URL)   // read environment varibale from .env
   .then(() => {
     console.log("Database connection Success!");
+    app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
   })
   .catch((err) => {
     console.error("Mongo Connection Error", err);
   });
 
-const PORT = process.env.PORT || 3000; //Declare the port number
+const PORT = process.env.PORT || 8080; //Declare the port number
 
 app.use(express.json()); //allows us to access request body as req.body
 app.use(morgan("dev"));  //enable incoming request logging in dev mode
