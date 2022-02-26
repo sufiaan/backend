@@ -32,6 +32,10 @@ app.use(express.json());
 //enable incoming request logging in dev mode
 app.use(morgan("dev"));
 
+let FamilyModel = require('./models/family');
+
+
+
 //index page
 app.get('/', (req, res) => {
   //we will send a string back
@@ -66,4 +70,41 @@ app.get('/worker/:id', (req, res) => {
           return;
       }
   }
+});
+
+//this is a template to work on.
+//this is not functioning.
+//page for posting a family document to DB
+app.post('/family', (req, res, next) => {
+  FamilyModel.create(req.body, (error, data) => {
+      if (error) {
+        return next(error, "Error inserting data.")
+      } else {
+        res.send(data,'Family is added to the database');
+      }
+  });
+});
+
+//this is a template to work on.
+//this is not functioning.
+//page for deleting a family document to DB
+app.delete('/family/:id', (req,res, next) => {
+  FamilyModel.findOneAndRemove({ clientId: req.params.id}, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+        res.status(200).json({
+          msg: data
+        });
+      res.send('Family is deleted.');
+    }
+  });
+});
+
+// basic error handler from class (change this)
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) 
+      err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
 });
