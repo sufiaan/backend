@@ -1,70 +1,69 @@
-// import/load the express library
+//import and load express app on a port we want to use
 const express = require('express')
-
-// create an instance of an express application
 const app = express()
 const port = 8080;
-//define what port to listen on
-const mongoose = require("mongoose");  // Require mongoose library
-//Adding better logging functionality
-const morgan = require("morgan");
-//In the production systems, we should not hardcode the sensitive data like API Keys, 
-//Secret Tokens, etc directly within the codebase (based on the Twelve factor App method). 
-// We will pass them as environment variables. This module helps us to load environment variables from a .env file into process.env
-require("dotenv").config();   // Require the dotenv
 
-// setting up mongoose DB connection
+ //Load up our other libraries (mongoose for schema and morgan for logging help)
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+
+// making our configuration file with an environment variable and requiring it
+require("dotenv").config();
+
+//mongoose connection
 mongoose
-  .connect(process.env.MONGO_URL)   // read environment varibale from .env
+  //use env for connect info
+  .connect(process.env.MONGO_URL)
+  //runs the connection request if successful
   .then(() => {
     console.log("Database connection Success!");
     app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
   })
+  //if error in connecting for some reason it is logged
   .catch((err) => {
     console.error("Mongo Connection Error", err);
   });
 
-const PORT = process.env.PORT || 8080; //Declare the port number
+//Declare the port
+const PORT = process.env.PORT || 8080;
 
-app.use(express.json()); //allows us to access request body as req.body
-app.use(morgan("dev"));  //enable incoming request logging in dev mode
+//req.body
+app.use(express.json()); 
+//enable incoming request logging in dev mode
+app.use(morgan("dev"));
 
-
-//default route
+//index page
 app.get('/', (req, res) => {
   //we will send a string back
-  res.send('Welcome to CIS 4339')
+  res.send('Welcome to Team 15\'s Index Page for the Project!')
 })
 
 
-// add on
-app.route('/Node').get(function(req,res)
-{
-    res.send("Tutorial on Node");
-});
-app.route('/Vue').get(function(req,res)
-{
-    res.send("Tutorial on Vue");
-});
-
-//create an endpoint to get all students from the API
-app.get('/students', (req, res) => {
-    res.json(students);
-
-    //check results at https://jsonformatter.org/
-});
-
-//retrieving student by studentID
+//template for something like retrieving a family or a worker.
+//retrieving family by id
 // adding the : to the route path we can define a variable
-app.get('/student/:id', (req, res) => {
+app.get('/family/:id', (req, res) => {
     // Reading id from the URL
     const id = req.params.id;
     console.log(id);
-    // Searching students for the id
-    for (let student of students) {
-        if (student.id === id) {
-            res.json(student);
+    // Searching families for the id
+    for (let family of families) {
+        if (family.id === id) {
+            res.json(family);
             return;
         }
     }
+});
+
+app.get('/worker/:id', (req, res) => {
+  // Reading id from the URL
+  const id = req.params.id;
+  console.log(id);
+  // Searching workers for the id
+  for (let worker of workers) {
+      if (worker.id === id) {
+          res.json(worker);
+          return;
+      }
+  }
 });
