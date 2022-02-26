@@ -1,22 +1,26 @@
+//define constants neccesary for our schema and mongoose usage
 const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//define schema
 let familySchema = new Schema({
+    //good for assigning random value
     _id: {
         type: String,
         default: uuid.v1
     },
-    clientID: {
+    //client Id entry for tying together
+    clientId: {
         type: Number,
         required: true
     },
     familyMember:{
-        lastname:{
+        firstName:{
             type:String,
             required:true
         },
-        firstname:{
+        lastName:{
             type:String,
             required:true
         },
@@ -36,7 +40,7 @@ let familySchema = new Schema({
             type:String,
             required:false
         },
-        race:{
+        ethnicity:{
             type:Array,
             required:false
         },
@@ -60,12 +64,18 @@ let familySchema = new Schema({
     
 module.exports = mongoose.model('family', familySchema)
 
-// Designation:
-// 1. clientID: Number (Link the activity to client)
-// 2. program: String (Dropdown List: Adult Education / Family Support Services / Early Childhood / Youth Services)
-// 3. shortNotes: String
-// 4. datetime: Date
-// 5. timeSpend: Number
-// 6. workID: relationship manager
-// 7. hasUsedServices: Boolean (true | false)
-// 8. handlingStatus: String (Not at all | Partially | Fully)
+/*Family Schema Description:
+1. _id: String (uuid.v1 for random value)
+2. clientId: Number (Link the activity to client)
+3. familyMember : { (nested JSON for family member data for families)
+    a. firstName : String (first name of family member)
+    b. lastName : String (last name of family member)
+    c. gender : Array (gender of family member)
+    d. birthday : String (birthday of family member)
+    e. age : Number (age of family member)
+    f. relation : String (how they are related to applicant)
+    g. ethnicity : Array (ethnicity of family member)
+    h. pregnant : Boolean (yes/no if family member is pregnant)
+    i. whereWorkOrStudy : String (where family member goes to work or school)
+    j. occupationOrGrade : String (what the actual job is or what grade they are in)
+}*/
