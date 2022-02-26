@@ -15,11 +15,11 @@ let workerSchema = new Schema({
         type: Number,
         required: true
     },
-    firstname:{
+    firstName:{
         type:String,
         required:true
     },
-    lastname:{
+    lastName:{
         type:String,
         required:true
     }
@@ -30,6 +30,8 @@ let workerSchema = new Schema({
     
 module.exports = mongoose.model('worker', workerSchema)
 
-// Worker Schema Description:
-// 1. _id: String (uuid.v1 for randome value)
-// 2. clientId: Number (Link the activity to client)
+/* Worker Schema Description:
+1. _id : String (uuid.v1 for random value)
+2. clientId : Number (Link the activity to client)
+3. firstName : String (first name of worker)
+4. lastName : String (last name of worker) */

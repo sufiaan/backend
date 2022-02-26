@@ -39,7 +39,7 @@ let ContactEthnicitySchema = new Schema({
 module.exports = mongoose.model('ContactEthnicity', ContactEthnicitySchema)
 
 /* Contact Ethnicity Dropdown Schema Description:
-1. _id : String (uuid for random id)
+1. _id : String (uuid for random value)
 2. ethnicity : {
     nested json to hold different options in dropdown
     a. HispanicOrLatino : Object

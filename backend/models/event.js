@@ -20,7 +20,7 @@ let eventSchema = new Schema({
         required: true
     },
     time: { 
-        type: datetime,
+        type: String,
         required: true
     },
     location:{
@@ -44,6 +44,13 @@ let eventSchema = new Schema({
     
 module.exports = mongoose.model('event', eventSchema)
 
-// Event Schema Description:
-// 1. _id: String (uuid.v1 for randome value)
-// 2. clientId: Number (Link the activity to client)
+/* Event Schema Description:
+1. _id: String (uuid.v1 for randome value)
+2. clientId: Number (Link the activity to client)
+3. eventName : String (name of the event taking place)
+4. time : String (store as string since datetime doesn't exist in JSON)
+5. location : {(nested JSON for event location data)
+    a. address : String (holds the address of the event)
+    b. city : String (holds the city of the event)
+    c. zipcode : Number (holds the zipcode of the event)
+} */

@@ -38,6 +38,10 @@ let intakeSchema = new Schema({
     
 module.exports = mongoose.model('intake', intakeSchema)
 
-// Intake Form Schema Description:
-// 1. _id: String (uuid.v1 for randome value)
-// 2. clientId: Number (Link the activity to client)
+/* Intake Form Schema Description:
+1. _id: String (uuid.v1 for random value)
+2. clientId: Number (Link the activity to client)
+3. familyId: Number (assigning value to family)
+4. startDate: String (date when first applied)
+5. endDate: String (date when ended)
+6. modifyAt: null (will change when entry is made)  */

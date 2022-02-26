@@ -43,5 +43,5 @@ let employmentSchema = new Schema({
 module.exports = mongoose.model('employment', employmentSchema)
 
 // Employment Schema Description:
-// 1. _id: String (uuid.v1 for randome value)
+// 1. _id: String (uuid.v1 for random value)
 // 2. clientId: Number (Link the activity to client)

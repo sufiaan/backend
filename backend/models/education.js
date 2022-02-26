@@ -19,7 +19,7 @@ let educationSchema = new Schema({
         required:true
     },
     lastGrade:{
-        type:null,
+        type:String,
         required:false
     },
     hasGraduated:{
@@ -47,10 +47,10 @@ module.exports = mongoose.model('education', educationSchema)
 
 // Education Schema Description:
 // 1. clientId: Number (Link the activity to client)
-// 2. program: String (Dropdown List: Adult Education / Family Support Services / Early Childhood / Youth Services)
-// 3. shortNotes: String
-// 4. datetime: Date
-// 5. timeSpend: Number
-// 6. workID: relationship manager
-// 7. hasUsedServices: Boolean (true | false)
-// 8. handlingStatus: String (Not at all | Partially | Fully)
+// 2. hasAttended: Boolean (to find out if someone has attended school)
+// 3. school: String (name of school they attended if valid if not valid should equate to "N/A")
+// 4. lastGrade: String (last grade attended "11th", "12th", etc.)
+// 5. hasGraduated: Boolean (to see if they have graduated)
+// 6. degree: Array [diploma, technical, associate, bachelor, master, PHD]
+// 7. certification: Boolean (if applicable)
+// 8. modifyAt: null (will change when there is an entry)

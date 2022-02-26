@@ -16,11 +16,11 @@ let familySchema = new Schema({
         required: true
     },
     familyMember:{
-        lastname:{
+        firstName:{
             type:String,
             required:true
         },
-        firstname:{
+        lastName:{
             type:String,
             required:true
         },
@@ -40,7 +40,7 @@ let familySchema = new Schema({
             type:String,
             required:false
         },
-        race:{
+        ethnicity:{
             type:Array,
             required:false
         },
@@ -64,6 +64,18 @@ let familySchema = new Schema({
     
 module.exports = mongoose.model('family', familySchema)
 
-// Family Schema Description:
-// 1. _id: String (uuid.v1 for randome value)
-// 2. clientId: Number (Link the activity to client)
+/*Family Schema Description:
+1. _id: String (uuid.v1 for random value)
+2. clientId: Number (Link the activity to client)
+3. familyMember : { (nested JSON for family member data for families)
+    a. firstName : String (first name of family member)
+    b. lastName : String (last name of family member)
+    c. gender : Array (gender of family member)
+    d. birthday : String (birthday of family member)
+    e. age : Number (age of family member)
+    f. relation : String (how they are related to applicant)
+    g. ethnicity : Array (ethnicity of family member)
+    h. pregnant : Boolean (yes/no if family member is pregnant)
+    i. whereWorkOrStudy : String (where family member goes to work or school)
+    j. occupationOrGrade : String (what the actual job is or what grade they are in)
+}*/
