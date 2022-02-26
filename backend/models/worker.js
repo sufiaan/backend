@@ -1,13 +1,17 @@
+//define constants neccesary for our schema and mongoose usage
 const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//define schema
 let workerSchema = new Schema({
+    //good for assigning random value
     _id: {
         type: String,
         default: uuid.v1
     },
-    clientID: {
+    //client Id entry for tying together
+    clientId: {
         type: Number,
         required: true
     },
@@ -26,12 +30,6 @@ let workerSchema = new Schema({
     
 module.exports = mongoose.model('worker', workerSchema)
 
-// Designation:
-// 1. clientID: Number (Link the activity to client)
-// 2. program: String (Dropdown List: Adult Education / Family Support Services / Early Childhood / Youth Services)
-// 3. shortNotes: String
-// 4. datetime: Date
-// 5. timeSpend: Number
-// 6. workID: relationship manager
-// 7. hasUsedServices: Boolean (true | false)
-// 8. handlingStatus: String (Not at all | Partially | Fully)
+// Worker Schema Description:
+// 1. _id: String (uuid.v1 for randome value)
+// 2. clientId: Number (Link the activity to client)

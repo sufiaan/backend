@@ -1,8 +1,11 @@
+//define constants neccesary for our schema and mongoose usage
 const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//define schema
 let educationSchema = new Schema({
+    //client Id entry for tying together
     clientId: {
         type: Number,
         required: true
@@ -42,8 +45,8 @@ let educationSchema = new Schema({
     
 module.exports = mongoose.model('education', educationSchema)
 
-// Designation:
-// 1. clientID: Number (Link the activity to client)
+// Education Schema Description:
+// 1. clientId: Number (Link the activity to client)
 // 2. program: String (Dropdown List: Adult Education / Family Support Services / Early Childhood / Youth Services)
 // 3. shortNotes: String
 // 4. datetime: Date
