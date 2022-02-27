@@ -11,9 +11,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 //mongoose connection
-mongoose
-  //use env for connect info
-  .connect(process.env.MONGO_URL)
+mongoose.connect(process.env.Mongo_URL)
   //runs the connection request if successful
   .then(() => {
     console.log("Database connection Success!");
@@ -34,48 +32,41 @@ app.use(morgan("dev"));
 
 let FamilyModel = require('./models/family');
 
-
+let workerModel = require('./models/worker');
 
 //index page
 app.get('/', (req, res) => {
   //we will send a string back
   res.send('Welcome to Team 15\'s Index Page for the Project!')
-})
-
-
-//template for something like retrieving a family or a worker.
-//retrieving family by id
-// adding the : to the route path we can define a variable
-app.get('/family/:id', (req, res) => {
-    // Reading id from the URL
-    const id = req.params.id;
-    console.log(id);
-    // Searching families for the id
-    for (let family of families) {
-        if (family.id === id) {
-            res.json(family);
-            return;
-        }
-    }
 });
 
-app.get('/worker/:id', (req, res) => {
-  // Reading id from the URL
-  const id = req.params.id;
-  console.log(id);
-  // Searching workers for the id
-  for (let worker of workers) {
-      if (worker.id === id) {
-          res.json(worker);
-          return;
-      }
-  }
+app.get('/worker', (req, res) => {
+  workerModel.find((error, data) => {
+    if (error) {
+      //here we are using a call to next() to send an error message back
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  });
+});
+
+app.post('/worker', (req, res) => {
+  workerModel.create(req.body, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+      console.log(data)
+      res.send('Student is added to the database');
+    }
+});
 });
 
 //this is a template to work on.
 //this is not functioning.
 //page for posting a family document to DB
-app.post('/family', (req, res, next) => {
+app.get('/family', (req, res, next) => {
   FamilyModel.create(req.body, (error, data) => {
       if (error) {
         return next(error, "Error inserting data.")
@@ -85,26 +76,12 @@ app.post('/family', (req, res, next) => {
   });
 });
 
-//this is a template to work on.
-//this is not functioning.
-//page for deleting a family document to DB
-app.delete('/family/:id', (req,res, next) => {
-  FamilyModel.findOneAndRemove({ clientId: req.params.id}, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-        res.status(200).json({
-          msg: data
-        });
-      res.send('Family is deleted.');
-    }
-  });
-});
+
 
 // basic error handler from class (change this)
-app.use(function (err, req, res, next) {
+/*app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) 
       err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
-});
+});*/
