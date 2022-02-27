@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to Team 15\'s Index Page for the Project!')
 });
 
-app.get('/worker', (req, res) => {
+app.get('/workers', (req, res) => {
   workerModel.find((error, data) => {
     if (error) {
       //here we are using a call to next() to send an error message back
@@ -51,17 +51,31 @@ app.get('/worker', (req, res) => {
   });
 });
 
-app.post('/worker', (req, res) => {
+app.post('/worker', (req, res, next) => {
   workerModel.create(req.body, (error, data) => {
     if (error) {
-      return next(error)
+      return next(error);
     } else {
-      res.json(data)
-      console.log(data)
-      res.send('Student is added to the database');
+      res.json(data);
+      res.send(data,'Worker is added to the database');
     }
+  });
 });
+
+// endpoint that will create a student document
+app.post('/student', (req, res, next) => {
+  StudentModel.create(req.body, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        // res.json(data)
+        res.send('Student is added to the database');
+      }
+  });
 });
+
+
+
 
 //this is a template to work on.
 //this is not functioning.

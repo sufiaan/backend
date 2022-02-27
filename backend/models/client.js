@@ -78,7 +78,7 @@ let clientSchema = new Schema({
        required:true
    },
    modifyAt:{
-       type:null,
+       type:Date,
        required:false
    }
 
