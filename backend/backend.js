@@ -2,7 +2,7 @@
 const express = require('express')
 const app = express()
 const port = 8080;
-<<<<<<< HEAD
+
 
  //Load up our other libraries (mongoose for schema and morgan for logging help)
 const mongoose = require("mongoose");
@@ -14,7 +14,7 @@ require("dotenv").config();
 //mongoose connection
 mongoose.connect(process.env.Mongo_URL)
   //runs the connection request if successful
-=======
+
 //define what port to listen on
 const mongoose = require("mongoose");  // Require mongoose library
 
@@ -33,7 +33,7 @@ require("dotenv").config();   // Require the dotenv
 // setting up mongoose DB connection
 mongoose
   .connect(process.env.MONGO_URL)   // read environment varibale from .env
->>>>>>> shaikh
+
   .then(() => {
     console.log("Database connection Success!");
     app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
@@ -43,7 +43,7 @@ mongoose
     console.error("Mongo Connection Error", err);
   });
 
-<<<<<<< HEAD
+
 //Declare the port
 const PORT = process.env.PORT || 8080;
 
@@ -51,15 +51,13 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json()); 
 //enable incoming request logging in dev mode
 app.use(morgan("dev"));
-=======
 
->>>>>>> shaikh
 
 let FamilyModel = require('./models/family');
 
-<<<<<<< HEAD
+
 let workerModel = require('./models/worker');
-=======
+
 // Setting up routers
 //route clients
 const clientsRouter = require('./routes/clients')
@@ -83,7 +81,7 @@ app.use('/residence', residence)
 
 
 const PORT = process.env.PORT || 8080; //Declare the port number
->>>>>>> shaikh
+
 
 //index page
 app.get('/', (req, res) => {
@@ -141,7 +139,7 @@ app.get('/family', (req, res, next) => {
   });
 });
 
-<<<<<<< HEAD
+
 
 
 // basic error handler from class (change this)
@@ -151,7 +149,7 @@ app.get('/family', (req, res, next) => {
       err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });*/
-=======
+
 //retrieving student by studentID
 // adding the : to the route path we can define a variable
 app.get('/student/:id', (req, res) => {
@@ -169,4 +167,4 @@ app.get('/student/:id', (req, res) => {
 
 
 // live db : MONGO_URL = "mongodb+srv://appuser:cis4339@cluster0.ehvtv.mongodb.net/CIS4339?retryWrites=true&w=majority"
->>>>>>> shaikh
+
