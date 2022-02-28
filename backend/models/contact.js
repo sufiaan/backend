@@ -5,7 +5,14 @@ const Schema = mongoose.Schema;
 
 //define schema
 let contactSchema = new Schema({
+<<<<<<< HEAD
     //client Id entry for tying together
+=======
+    _id: {
+        type: String,
+        default: uuid.v1
+    },
+>>>>>>> shaikh
     clientId: {
         type: Number,
         required: true
@@ -48,14 +55,22 @@ let contactSchema = new Schema({
     },
     isPregnant:{
         type: Boolean,
+<<<<<<< HEAD
         required:false
     },
     isTeenParent:{
         type: Boolean,
         required:false
+=======
+        required:true
+    },
+    isTeenParent:{
+        type: Boolean,
+        required:true
+>>>>>>> shaikh
     },
     modifyAt:{
-        type:null,
+        type:Date,
         required:false
     }
 },

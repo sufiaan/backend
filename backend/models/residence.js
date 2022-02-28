@@ -39,8 +39,8 @@ let residenceSchema = new Schema({
         type: Number,
         required:true
     },
-    timeofResidence:{
-        type: Array,
+    timeOfResidence:{
+        type: Number,
         required:true
     },
     livingArrangements:{
@@ -60,7 +60,7 @@ let residenceSchema = new Schema({
         required:false
     },
     modifyAt:{
-        type:null,
+        type:Date,
         required:false
     }
 },

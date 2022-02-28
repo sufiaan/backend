@@ -19,8 +19,8 @@ let employmentSchema = new Schema({
         type:Array,
         required:true
     },
-    length:{
-        type:Array,
+    years:{
+        type:Number,
         required:false
     },
     employer:{
@@ -32,7 +32,7 @@ let employmentSchema = new Schema({
         required:false
     },
     modifyAt:{
-        type:null,
+        type:Date,
         required:false
     }
 },

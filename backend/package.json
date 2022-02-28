@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "project team 15",
+  "main": "backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CIS-FA21/project-cis_4339_project_3.git"
+  },
+  "author": "Sufian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CIS-FA21/project-cis_4339_project_3/issues"
+  },
+  "homepage": "https://github.com/CIS-FA21/project-cis_4339_project_3#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.8",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.13",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {}
+}
