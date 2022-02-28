@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let contactSchema = new Schema({
+    _id: {
+        type: String,
+        default: uuid.v1
+    },
     clientId: {
         type: Number,
         required: true
@@ -45,14 +49,14 @@ let contactSchema = new Schema({
     },
     isPregnency:{
         type: Boolean,
-        required:True
+        required:true
     },
     isTeenParent:{
         type: Boolean,
-        required:True
+        required:true
     },
     modifyAt:{
-        type:null,
+        type:Date,
         required:false
     }
 },

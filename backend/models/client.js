@@ -3,15 +3,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let clientSchema = new Schema({
+    _id: {
+        type: String,
+        default: uuid.v1
+    },
     clientId: {
         type: Number,
         required: true
     },
-    firstname:{
+    firstName:{
         type:String,
         required:true
     },
-    lastname:{
+    lastName:{
         type:String,
         required:true
     },
@@ -60,8 +64,7 @@ let clientSchema = new Schema({
        required:false
    },
    vaccinePreference:{
-       type:null,
-       required:false
+       type:String,
    },
    recentEvents:{
        type:Array,
@@ -72,11 +75,11 @@ let clientSchema = new Schema({
        required:true
    },
    gender:{
-       type:Array,
+       type:String,
        required:true
    },
    modifyAt:{
-       type:null,
+       type:Date,
        required:false
    }
 

@@ -7,7 +7,7 @@ let clientDocSchema = new Schema({
         type: String,
         default: uuid.v1
     },
-    clientID: {
+    clientId: {
         type: Number,
         required: true
     },
@@ -20,8 +20,7 @@ let clientDocSchema = new Schema({
         required:true
     },
     otherDoc:{
-        type:null,
-        required:false
+        type:String,
     }
 },
     {

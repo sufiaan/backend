@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let educationSchema = new Schema({
+    _id: {
+        type: String,
+        default: uuid.v1
+    },
     clientId: {
         type: Number,
         required: true
@@ -16,7 +20,7 @@ let educationSchema = new Schema({
         required:true
     },
     lastGrade:{
-        type:null,
+        type:String,
         required:false
     },
     hasGraduated:{
@@ -32,7 +36,7 @@ let educationSchema = new Schema({
         required:false
     },
     modifyAt:{
-        type:null,
+        type:Date,
         required:false
     }
 },
