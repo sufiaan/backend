@@ -10,10 +10,7 @@ let clientDocSchema = new Schema({
         type: String,
         default: uuid.v1
     },
-<<<<<<< HEAD
     //client Id entry for tying together
-=======
->>>>>>> shaikh
     clientId: {
         type: Number,
         required: true
