@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-//suffian work
-=======
 const express = require("express");
 const router = express.Router()
 const ClientDocModel = require('../models/clientDoc');
@@ -122,4 +119,3 @@ router.delete('/:id', (req, res, next) => {
 });
 
 module.exports = router
->>>>>>> shaikh
