@@ -2,11 +2,9 @@ const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//define schema 
 let clientSchema = new Schema({
-    _id: {
-        type: String,
-        default: uuid.v1
-    },
+    //client Id entry for tying together
     clientId: {
         type: Number,
         required: true
@@ -65,6 +63,7 @@ let clientSchema = new Schema({
    },
    vaccinePreference:{
        type:String,
+       required:false
    },
    recentEvents:{
        type:Array,
@@ -90,12 +89,22 @@ let clientSchema = new Schema({
     
 module.exports = mongoose.model('client', clientSchema)
 
-// Designation:
-// 1. clientID: Number (Link the activity to client)
-// 2. program: String (Dropdown List: Adult Education / Family Support Services / Early Childhood / Youth Services)
-// 3. shortNotes: String
-// 4. datetime: Date
-// 5. timeSpend: Number
-// 6. workID: relationship manager
-// 7. hasUsedServices: Boolean (true | false)
-// 8. handlingStatus: String (Not at all | Partially | Fully)
+/* Client Schema Description:
+1. clientId : Number
+2. firstName : String
+3. lastName : String
+4. birthday : String (mm/dd/yyyy)
+5. phoneNumber : Number
+6. zipCode : Number
+7. marketSurvey : Array [option 1, option 2, option 3, etc.]
+8. isNeedSupport : Boolean (yes/no)
+9. numChildren : Number 
+10. is65orOlder : Boolean (check for medicare or social security)
+11. isVeteran : Boolean (yes/no)
+12. raceEthnicity : Array 
+13. isGettingVaccine : Boolean (yes/no)
+14. vaccinePreference: String (brand if has a preference)
+15. recentEvents: Array [will hold references to recent events]
+16. events : Object [will hold information about specific events]
+17. gender : Array
+18. modifyAt : null (will be updated when entry is modified)*/

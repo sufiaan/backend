@@ -9,7 +9,7 @@ router.post('/', (req, res, next) => {
             return next(error);
         }
         else {
-            res.send('Client contact education info is added to the database.');
+            res.send('Client employment info is added to the database.');
         }
     });
 });
@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
             return next(error);
         }
         else if (data === null) {
-            res.status(404).send('Client doc  not found');
+            res.status(404).send('Client employment  not found');
         }
         else {
             res.json(data);
@@ -37,17 +37,30 @@ router.get('/:id', (req, res, next) => {
             return next(error);
         }
         else if (data === null) {
-            res.status(404).send('Client not found');
+            res.status(404).send('Client employment found');
         }
         else {
             res.json(data);
         }
-    }).sort({ modifyAt: -1 });     // Only return the latest document
+    }).sort({ modifyAt: -1 }); 
 });
 
 
 router.delete('/:id', (req, res, next) => {
     employmentModel.remove({ clientId: req.params.id }, (error, data) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            res.status(200).json({
+                msg: data
+            });
+        }
+    });
+});
+
+router.delete('/employmentId/:id', (req, res, next) => {
+    employmentModel.remove({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }

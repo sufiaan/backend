@@ -1,7 +1,9 @@
+//define constants neccesary for our schema and mongoose usage
 const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//define schema
 let educationSchema = new Schema({
     _id: {
         type: String,
@@ -46,12 +48,12 @@ let educationSchema = new Schema({
     
 module.exports = mongoose.model('education', educationSchema)
 
-// Designation:
-// 1. clientID: Number (Link the activity to client)
-// 2. program: String (Dropdown List: Adult Education / Family Support Services / Early Childhood / Youth Services)
-// 3. shortNotes: String
-// 4. datetime: Date
-// 5. timeSpend: Number
-// 6. workID: relationship manager
-// 7. hasUsedServices: Boolean (true | false)
-// 8. handlingStatus: String (Not at all | Partially | Fully)
+// Education Schema Description:
+// 1. clientId: Number (Link the activity to client)
+// 2. hasAttended: Boolean (to find out if someone has attended school)
+// 3. school: String (name of school they attended if valid if not valid should equate to "N/A")
+// 4. lastGrade: String (last grade attended "11th", "12th", etc.)
+// 5. hasGraduated: Boolean (to see if they have graduated)
+// 6. degree: Array [diploma, technical, associate, bachelor, master, PHD]
+// 7. certification: Boolean (if applicable)
+// 8. modifyAt: null (will change when there is an entry)
