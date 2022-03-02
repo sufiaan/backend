@@ -16,7 +16,7 @@ let employmentSchema = new Schema({
         required: true
     },
     employmentStatus:{
-        type:Array,
+        type:String,
         required:true
     },
     years:{

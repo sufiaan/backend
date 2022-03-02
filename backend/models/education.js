@@ -5,14 +5,10 @@ const Schema = mongoose.Schema;
 
 //define schema
 let educationSchema = new Schema({
-<<<<<<< HEAD
-    //client Id entry for tying together
-=======
     _id: {
         type: String,
         default: uuid.v1
     },
->>>>>>> shaikh
     clientId: {
         type: Number,
         required: true

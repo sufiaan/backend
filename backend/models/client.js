@@ -4,14 +4,7 @@ const Schema = mongoose.Schema;
 
 //define schema 
 let clientSchema = new Schema({
-<<<<<<< HEAD
     //client Id entry for tying together
-=======
-    _id: {
-        type: String,
-        default: uuid.v1
-    },
->>>>>>> shaikh
     clientId: {
         type: Number,
         required: true
@@ -70,10 +63,7 @@ let clientSchema = new Schema({
    },
    vaccinePreference:{
        type:String,
-<<<<<<< HEAD
        required:false
-=======
->>>>>>> shaikh
    },
    recentEvents:{
        type:Array,
