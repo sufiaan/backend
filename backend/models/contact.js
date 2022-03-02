@@ -55,19 +55,11 @@ let contactSchema = new Schema({
     },
     isPregnant:{
         type: Boolean,
-<<<<<<< HEAD
-        required:false
-    },
-    isTeenParent:{
-        type: Boolean,
-        required:false
-=======
         required:true
     },
     isTeenParent:{
         type: Boolean,
         required:true
->>>>>>> shaikh
     },
     modifyAt:{
         type:Date,
