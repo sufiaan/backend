@@ -75,9 +75,24 @@ app.use('/contact', contact)
 // router employment
 const employment = require('./routes/employment')
 app.use('/employment', employment)
-// router employment
+// router residence
 const residence = require('./routes/residence')
 app.use('/residence', residence)
+// router family
+const family = require('./routes/family')
+app.use('/family', family)
+// router health
+const health = require('./routes/health')
+app.use('/health', health)
+// router income
+const income = require('./routes/income')
+app.use('/income', income)
+// router intake
+const intake = require('./routes/intake')
+app.use('/intake', intake)
+// router worker
+const worker = require('./routes/worker')
+app.use('/worker', worker)
 //end routers setting
 
 //index page
