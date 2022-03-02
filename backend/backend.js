@@ -3,9 +3,22 @@ const express = require('express')
 const app = express()
 const port = 8080;
 
+const mongoose = require("mongoose");  // Require mongoose library
+
+
+// making our configuration file with an environment variable and requiring it
+require("dotenv").config();
+
+//mongoose connection
+mongoose.connect(process.env.Mongo_URL)
+  //runs the connection request if successful
+
+//define what port to listen on
+
+
 
  //Load up our other libraries (mongoose for schema and morgan for logging help)
-const mongoose = require("mongoose");
+
 //Adding better logging functionality
 const morgan = require("morgan");
 
@@ -40,6 +53,9 @@ mongoose
   });
 
 
+//Declare the port
+const PORT = process.env.PORT || 8080;
+
 //req.body
 app.use(express.json()); 
 //enable incoming request logging in dev mode
@@ -73,7 +89,7 @@ app.use('/residence', residence)
 //end routers setting
 
 
-const PORT = process.env.PORT || 8080; //Declare the port number
+
 
 
 //index page
