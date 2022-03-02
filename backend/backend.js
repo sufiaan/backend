@@ -81,8 +81,8 @@ app.use('/residence', residence)
 //const health = require('./routes/health')
 //app.use('/health', health)
 //router income
-//const income = require('./routes/income')
-//app.use('/income', income)
+const income = require('./routes/income')
+app.use('/income', income)
 //router intake
 //const intake = require('./routes/intake')
 //app.use('/intake', intake)

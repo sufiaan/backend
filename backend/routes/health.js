@@ -1,3 +1,7 @@
+const express = require("express");
+const router = express.Router();
+const IncomeModel = require('../models/income');
+
 //health stuff
 app.get('/health', (req, res, next) => {
     FamilyModel.create(req.body, (error, data) => {
