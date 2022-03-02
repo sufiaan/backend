@@ -5,19 +5,14 @@ const port = 8080;
 
 const mongoose = require("mongoose");  // Require mongoose library
 
-
 // making our configuration file with an environment variable and requiring it
 require("dotenv").config();
 
 //mongoose connection
 mongoose.connect(process.env.Mongo_URL)
-  //runs the connection request if successful
+//runs the connection request if successful
 
-//define what port to listen on
-
-
-
- //Load up our other libraries (mongoose for schema and morgan for logging help)
+//Load up our other libraries (mongoose for schema and morgan for logging help)
 
 //Adding better logging functionality
 const morgan = require("morgan");
@@ -52,7 +47,6 @@ mongoose
     console.error("Mongo Connection Error", err);
   });
 
-
 //Declare the port
 const PORT = process.env.PORT || 8080;
 
@@ -61,9 +55,7 @@ app.use(express.json());
 //enable incoming request logging in dev mode
 app.use(morgan("dev"));
 
-
 let FamilyModel = require('./models/family');
-
 
 let workerModel = require('./models/worker');
 
@@ -88,92 +80,8 @@ const residence = require('./routes/residence')
 app.use('/residence', residence)
 //end routers setting
 
-
-
-
-
 //index page
 app.get('/', (req, res) => {
   //we will send a string back
   res.send('Welcome to Team 15\'s Index Page for the Project!')
 });
-
-app.get('/workers', (req, res) => {
-  workerModel.find((error, data) => {
-    if (error) {
-      //here we are using a call to next() to send an error message back
-      return next(error)
-    } else {
-      res.json(data)
-    }
-  });
-});
-
-app.post('/worker', (req, res, next) => {
-  workerModel.create(req.body, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.json(data);
-      res.send(data,'Worker is added to the database');
-    }
-  });
-});
-
-// endpoint that will create a student document
-app.post('/student', (req, res, next) => {
-  StudentModel.create(req.body, (error, data) => {
-      if (error) {
-        return next(error)
-      } else {
-        // res.json(data)
-        res.send('Student is added to the database');
-      }
-  });
-});
-
-
-
-
-//this is a template to work on.
-//this is not functioning.
-//page for posting a family document to DB
-app.get('/family', (req, res, next) => {
-  FamilyModel.create(req.body, (error, data) => {
-      if (error) {
-        return next(error, "Error inserting data.")
-      } else {
-        res.send(data,'Family is added to the database');
-      }
-  });
-});
-
-
-
-
-// basic error handler from class (change this)
-/*app.use(function (err, req, res, next) {
-  console.error(err.message);
-  if (!err.statusCode) 
-      err.statusCode = 500;
-  res.status(err.statusCode).send(err.message);
-});*/
-
-//retrieving student by studentID
-// adding the : to the route path we can define a variable
-app.get('/student/:id', (req, res) => {
-    // Reading id from the URL
-    const id = req.params.id;
-    console.log(id);
-    // Searching students for the id
-    for (let student of students) {
-        if (student.id === id) {
-            res.json(student);
-            return;
-        }
-    }
-});
-
-
-// live db : MONGO_URL = "mongodb+srv://appuser:cis4339@cluster0.ehvtv.mongodb.net/CIS4339?retryWrites=true&w=majority"
-

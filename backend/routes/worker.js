@@ -38,3 +38,30 @@ app.get('/worker', (req, res, next) => {
         }
     });
   });
+
+
+  /*
+  
+app.get('/workers', (req, res) => {
+  workerModel.find((error, data) => {
+    if (error) {
+      //here we are using a call to next() to send an error message back
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  });
+});
+
+app.post('/worker', (req, res, next) => {
+  workerModel.create(req.body, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+      res.send(data,'Worker is added to the database');
+    }
+  });
+});
+
+*/
