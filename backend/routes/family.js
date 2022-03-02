@@ -58,3 +58,19 @@ app.delete('/family/:id', (req,res, next) => {
       }
     });
   });
+
+
+/*
+//this is a template to work on.
+//this is not functioning.
+//page for posting a family document to DB
+app.get('/family', (req, res, next) => {
+  FamilyModel.create(req.body, (error, data) => {
+      if (error) {
+        return next(error, "Error inserting data.")
+      } else {
+        res.send(data,'Family is added to the database');
+      }
+  });
+});
+*/
