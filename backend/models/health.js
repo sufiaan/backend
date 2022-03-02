@@ -32,8 +32,8 @@ let healthSchema = new Schema({
         required:false
     },
     modifyAt:{
-        type:null,
-        required:false
+        type:Date,
+        required:Date.now
     }
 },
     {

@@ -1,8 +1,22 @@
-//income stuff
+const express = require("express");
+const router = express.Router();
+const ClientDocModel = require('../models/income');
 
-//kyler stuff
-app.get('/income', (req, res, next) => {
-    FamilyModel.create(req.body, (error, data) => {
+  router.get('/income', (req, res, next) => {
+    IncomeModel.find((error, data) => {
+        if (error) {
+          return next(error, "Error inserting data.");
+        } else if (data ===null) {
+          res.status(404).send('Income document not found.');
+        }
+        else {
+          res.send(data,'income info is added to the database');
+        }
+    });
+  });
+
+  router.post('/income', (req, res, next) => {
+    IncomeModel.create(req.body, (error, data) => {
         if (error) {
           return next(error, "Error inserting data.")
         } else {
@@ -11,17 +25,7 @@ app.get('/income', (req, res, next) => {
     });
   });
 
-  app.post('/income', (req, res, next) => {
-    FamilyModel.create(req.body, (error, data) => {
-        if (error) {
-          return next(error, "Error inserting data.")
-        } else {
-          res.send(data,'income info is added to the database');
-        }
-    });
-  });
-
-  app.put('/income', (req, res, next) => {
+  router.put('/income', (req, res, next) => {
     FamilyModel.create(req.body, (error, data) => {
         if (error) {
           return next(error, "Error updating data.")
@@ -31,7 +35,7 @@ app.get('/income', (req, res, next) => {
     });
   });
 
-  app.delete('/income', (req, res, next) => {
+  router.delete('/income', (req, res, next) => {
     FamilyModel.create(req.body, (error, data) => {
         if (error) {
           return next(error, "Error removing data.")
