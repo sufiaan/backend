@@ -6,14 +6,13 @@ const residenceModel = require('../models/residence');
 router.post('/', (req, res, next) => {
     residenceModel.create(req.body, (error, data) => {
         if (error) {
-            return next(error);
+            return next(error,"Error in inserting data");
         }
         else {
-            res.send('Client contact education info is added to the database.');
+            res.send('Residence info added to database');
         }
     });
 });
-
 
 
 router.get('/', (req, res, next) => {
@@ -22,7 +21,7 @@ router.get('/', (req, res, next) => {
             return next(error);
         }
         else if (data === null) {
-            res.status(404).send('Client doc  not found');
+            res.status(404).send('Residence info not found');
         }
         else {
             res.json(data);
@@ -37,7 +36,7 @@ router.get('/:id', (req, res, next) => {
             return next(error);
         }
         else if (data === null) {
-            res.status(404).send('Client not found');
+            res.status(404).send('Residence info  not found');
         }
         else {
             res.json(data);
@@ -58,5 +57,19 @@ router.delete('/:id', (req, res, next) => {
         }
     });
 });
+
+router.delete('/residenceId/:id', (req, res, next) => {
+    residenceModel.remove({ _id: req.params.id }, (error, data) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            res.status(200).json({
+                msg: data
+            });
+        }
+    });
+});
+
 
 module.exports = router

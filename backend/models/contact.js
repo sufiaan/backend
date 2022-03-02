@@ -5,14 +5,10 @@ const Schema = mongoose.Schema;
 
 //define schema
 let contactSchema = new Schema({
-<<<<<<< HEAD
-    //client Id entry for tying together
-=======
     _id: {
         type: String,
         default: uuid.v1
     },
->>>>>>> shaikh
     clientId: {
         type: Number,
         required: true
@@ -38,7 +34,7 @@ let contactSchema = new Schema({
         required:false
     },
     maritalStatus:{
-        type: Array,
+        type: String,
         required:true
     },
     language:{

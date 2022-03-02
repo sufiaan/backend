@@ -28,7 +28,7 @@ let residenceSchema = new Schema({
         required:true
     },
     country:{
-        type: Array,
+        type: String,
         required:true
     },
     zip:{

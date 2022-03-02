@@ -50,11 +50,28 @@ router.get('/:id', (req, res, next) => {
 });
 
 
-// DELETE: an endpoint to delete a client education by document id and modify time.
+// DELETE: an endpoint to delete a client education by client id .
 router.delete('/:id', (req, res, next) => {
 
     // Mongoose will use clientID of document.
     educationModel.remove({ clientId: req.params.id }, (error, data) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            res.status(200).json({
+                msg: data
+            });
+        }
+    });
+});
+
+
+// DELETE: an endpoint to delete a client education by education id.
+router.delete('/educationId/:id', (req, res, next) => {
+
+    // Mongoose will use clientID of document.
+    educationModel.remove({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }

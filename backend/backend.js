@@ -3,10 +3,8 @@ const express = require('express')
 const app = express()
 const port = 8080;
 
+const mongoose = require("mongoose");  // Require mongoose library
 
- //Load up our other libraries (mongoose for schema and morgan for logging help)
-const mongoose = require("mongoose");
-const morgan = require("morgan");
 
 // making our configuration file with an environment variable and requiring it
 require("dotenv").config();
@@ -16,13 +14,24 @@ mongoose.connect(process.env.Mongo_URL)
   //runs the connection request if successful
 
 //define what port to listen on
-const mongoose = require("mongoose");  // Require mongoose library
 
-// Import cors module.
-const cors = require('cors');
+
+
+ //Load up our other libraries (mongoose for schema and morgan for logging help)
 
 //Adding better logging functionality
 const morgan = require("morgan");
+
+// making our configuration file with an environment variable and requiring it
+require("dotenv").config();
+
+//mongoose connection
+mongoose.connect(process.env.Mongo_URL)
+  //runs the connection request if successful
+
+
+// Import cors module.
+const cors = require('cors');
 
 
 //In the production systems, we should not hardcode the sensitive data like API Keys, 
@@ -80,7 +89,7 @@ app.use('/residence', residence)
 //end routers setting
 
 
-const PORT = process.env.PORT || 8080; //Declare the port number
+
 
 
 //index page
