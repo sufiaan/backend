@@ -28,8 +28,8 @@ let intakeSchema = new Schema({
         required:true
     },
     modifyAt:{
-        type:Date,
-        required:Date.now
+        type:null,
+        required:false
     }
 },
     {
