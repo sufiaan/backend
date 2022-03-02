@@ -39,7 +39,7 @@ let educationSchema = new Schema({
     },
     modifyAt:{
         type:Date,
-        required:false
+        required:Date.now
     }
 },
     {

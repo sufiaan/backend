@@ -1,3 +1,6 @@
+const express = require("express");
+const router = express.Router();
+const IncomeModel = require('../models/income');
 //this is a template to work on.
 //this is not functioning.
 //page for posting a family document to DB
