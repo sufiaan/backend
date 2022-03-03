@@ -74,9 +74,11 @@ app.use('/employment', employment)
 // router residence
 const residence = require('./routes/residence')
 app.use('/residence', residence)
+
+
 //router family
-//const family = require('./routes/family')
-//app.use('/family', family)
+const family = require('./routes/family')
+app.use('/family', family)
 //router health
 //const health = require('./routes/health')
 //app.use('/health', health)

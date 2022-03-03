@@ -1,44 +1,86 @@
 const express = require("express");
 const router = express.Router();
-const IncomeModel = require('../models/income');
+const IntakeModel = require('../models/intake');
 
-//intake stuff
-app.get('/intake', (req, res, next) => {
-    FamilyModel.create(req.body, (error, data) => {
+//get route for intake model
+  router.get('/', (req, res, next) => {
+    IntakeModel.find((error, data) => {
         if (error) {
-          return next(error, "Error inserting data.")
+          return next(error);
+        } else if (data === null) {
+          res.status(404).send('intake document not found.');
+        }
+        else {
+          res.json(data);
+        }
+    }).sort({ modifyAt: -1 });
+  });
+  
+  //get route for intake model by specific id
+  router.get('/:id', (req, res, next) => {
+    IntakeModel.find({ clientId: req.params.id }, (error, data) => {
+        if (error) {
+            return next(error);
+        }
+        else if (data === null) {
+            res.status(404).send('intake info  not found');
+        }
+        else {
+            res.json(data);
+        }
+    }).sort({ modifyAt: -1 });     // Only return the latest document
+});
+
+  //post route for intake model
+  router.post('/', (req, res, next) => {
+    IntakeModel.create(req.body, (error, data) => {
+        if (error) {
+          console.log('A');
+          return next(error)
         } else {
-          res.send(data,'intake info is added to the database');
+          console.log('B');
+          res.send('intake info is added to the database');
         }
     });
   });
 
-  app.post('/intake', (req, res, next) => {
-    FamilyModel.create(req.body, (error, data) => {
+  //update route for intake model
+  router.put('/:id', (req, res, next) => {
+    IntakeModel.find({clientId: req.params.id}, (error,data) => {
         if (error) {
-          return next(error, "Error inserting data.")
-        } else {
-          res.send(data,'intake info is added to the database');
-        }
-    });
-  });
-
-  app.put('/intake', (req, res, next) => {
-    FamilyModel.create(req.body, (error, data) => {
-        if (error) {
-          return next(error, "Error updating data.")
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('intake info not found');
         } else {
           res.send(data,'intake info is updated in the database');
         }
-    });
+    }).sort({ modifyAt: -1});
   });
 
-  app.delete('/intake', (req, res, next) => {
-    FamilyModel.create(req.body, (error, data) => {
+  //delete route for intake model
+  router.delete('/:id', (req, res, next) => {
+    IntakeModel.remove({ clientId: req.params.id }, (error, data) => {
         if (error) {
-          return next(error, "Error removing data.")
+          return next(error);
         } else {
-          res.send(data,'worker info is removed from the database');
+          res.status(200).json({
+            msg: data});
         }
     });
   });
+
+
+router.delete('/intakeId/:id', (req, res, next) => {
+      IntakeModel.remove({ _id: req.params.id }, (error, data) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            res.status(200).json({
+                msg: data
+            });
+        }
+    });
+});
+
+module.exports = router;

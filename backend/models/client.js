@@ -79,7 +79,7 @@ let clientSchema = new Schema({
    },
    modifyAt:{
        type:Date,
-       required:Date.now
+       default:Date.now
    }
 
 },
