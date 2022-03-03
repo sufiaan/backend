@@ -44,6 +44,22 @@ router.get('/:id', (req, res, next) => {
     }).sort({ modifyAt: -1 });     // Only return the latest document
 });
 
+//update route for residenceModel model
+router.put('/:id', (req, res, next) => {
+    residenceModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('residenceModel info not found');
+        } else {
+            res.send('residenceModel is edited via PUT');
+            console.log('residenceModel successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
+
 
 router.delete('/:id', (req, res, next) => {
     residenceModel.remove({ clientId: req.params.id }, (error, data) => {

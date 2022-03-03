@@ -101,6 +101,21 @@ router.get('/history/:id', (req, res, next) => {
     }).sort({ modifyAt: -1 });
 });
 
+//update route for clientDoc model
+router.put('/:id', (req, res, next) => {
+    ClientDocModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('clientDoc info not found');
+        } else {
+            res.send('clientDoc is edited via PUT');
+            console.log('clientDoc successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
 
 // DELETE: an endpoint to delete a client by client ID and modify time.
 router.delete('/:id', (req, res, next) => {

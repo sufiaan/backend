@@ -45,6 +45,21 @@ router.get('/:id', (req, res, next) => {
     }).sort({ modifyAt: -1 });     // Only return the latest document
 });
 
+//update route for contactModel model
+router.put('/:id', (req, res, next) => {
+    contactModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('contactModel info not found');
+        } else {
+            res.send('contactModel is edited via PUT');
+            console.log('contactModel successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
 
 router.delete('/:id', (req, res, next) => {
     contactModel.remove({ clientId: req.params.id }, (error, data) => {

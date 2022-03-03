@@ -60,6 +60,22 @@ const IncomeModel = require('../models/income');
     }).sort({ modifyAt: -1});
   });
 
+//update route for IncomeModel model
+router.put('/:id', (req, res, next) => {
+  IncomeModel.findOneAndUpdate({clientId: req.params.id}, {
+      $set: req.body
+    }, (error,data) => {
+      if (error) {
+        return next(error);
+      } else if (data === null){
+          res.status(404).send('IncomeModel info not found');
+      } else {
+          res.send('IncomeModel is edited via PUT');
+          console.log('IncomeModel successfully updated!', data)
+      }
+  }).sort({ modifyAt: -1});
+});
+
   //delete route for income model
   router.delete('/:id', (req, res, next) => {
     IncomeModel.deleteOne({ clientId: req.params.id }, (error, data) => {

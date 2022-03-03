@@ -45,6 +45,21 @@ router.get('/:id', (req, res, next) => {
     }).sort({ modifyAt: -1 }); 
 });
 
+//update route for employmentModel model
+router.put('/:id', (req, res, next) => {
+    employmentModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('employmentModel info not found');
+        } else {
+            res.send('employmentModel is edited via PUT');
+            console.log('employmentModel successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
 
 router.delete('/:id', (req, res, next) => {
     employmentModel.deleteOne({ clientId: req.params.id }, (error, data) => {
