@@ -46,7 +46,7 @@ const WorkerModel = require('../models/worker');
 
   //update route for worker model
   router.put('/:id', (req, res, next) => {
-    WorkerModel.find({clientId: req.params.id}, (error,data) => {
+    WorkerModel.findOneAndUpdate({clientId: req.params.id}, {$set:req.body}, (error,data) => {
         if (error) {
           return next(error);
         } else if (data === null){
@@ -59,7 +59,7 @@ const WorkerModel = require('../models/worker');
 
   //delete route for worker model
   router.delete('/:id', (req, res, next) => {
-    WorkerModel.remove({ clientId: req.params.id }, (error, data) => {
+    WorkerModel.deleteOne({ clientId: req.params.id }, (error, data) => {
         if (error) {
           return next(error);
         } else {
@@ -71,7 +71,7 @@ const WorkerModel = require('../models/worker');
 
 
 router.delete('/workerId/:id', (req, res, next) => {
-      WorkerModel.remove({ _id: req.params.id }, (error, data) => {
+      WorkerModel.deleteOne({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }

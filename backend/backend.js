@@ -84,17 +84,17 @@ app.use('/event', event)
 const family = require('./routes/family')
 app.use('/family', family)
 //router health
-//const health = require('./routes/health')
-//app.use('/health', health)
+const health = require('./routes/health')
+app.use('/health', health)
 //router income
 const income = require('./routes/income')
 app.use('/income', income)
 //router intake
-//const intake = require('./routes/intake')
-//app.use('/intake', intake)
+const intake = require('./routes/intake')
+app.use('/intake', intake)
 //router worker
-//const worker = require('./routes/worker')
-//app.use('/worker', worker)
+const worker = require('./routes/worker')
+app.use('/worker', worker)
 //end routers setting
 
 //index page

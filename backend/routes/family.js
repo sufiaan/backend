@@ -46,7 +46,7 @@ const FamilyModel = require('../models/family');
 
   //update route for Family model
   router.put('/:id', (req, res, next) => {
-    FamilyModel.find({clientId: req.params.id}, (error,data) => {
+    FamilyModel.findOneAndUpdate({clientId: req.params.id}, {$set:req.body}, (error,data) => {
         if (error) {
           return next(error);
         } else if (data === null){
@@ -59,7 +59,7 @@ const FamilyModel = require('../models/family');
 
   //delete route for Family model
   router.delete('/:id', (req, res, next) => {
-    FamilyModel.remove({ clientId: req.params.id }, (error, data) => {
+    FamilyModel.deleteOne({ clientId: req.params.id }, (error, data) => {
         if (error) {
           return next(error);
         } else {
@@ -71,7 +71,7 @@ const FamilyModel = require('../models/family');
 
 
 router.delete('/familyId/:id', (req, res, next) => {
-      FamilyModel.remove({ _id: req.params.id }, (error, data) => {
+      FamilyModel.deleteOne({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }

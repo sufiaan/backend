@@ -46,20 +46,23 @@ const IncomeModel = require('../models/income');
 
   //update route for income model
   router.put('/:id', (req, res, next) => {
-    IncomeModel.find({clientId: req.params.id}, (error,data) => {
+    IncomeModel.findOneAndUpdate({clientId: req.params.id}, {$set:req.body}, (error,data) => {
         if (error) {
+          console.log('a')
           return next(error);
         } else if (data === null){
+          console.log('b')
             res.status(404).send('Income info not found');
         } else {
-          res.send(data,'income info is updated in the database');
+          console.log('c')
+          res.json('income info is updated in the database');
         }
     }).sort({ modifyAt: -1});
   });
 
   //delete route for income model
   router.delete('/:id', (req, res, next) => {
-    IncomeModel.remove({ clientId: req.params.id }, (error, data) => {
+    IncomeModel.deleteOne({ clientId: req.params.id }, (error, data) => {
         if (error) {
           return next(error);
         } else {
@@ -71,7 +74,7 @@ const IncomeModel = require('../models/income');
 
 
 router.delete('/incomeId/:id', (req, res, next) => {
-    IncomeModel.remove({ _id: req.params.id }, (error, data) => {
+    IncomeModel.deleteOne({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }

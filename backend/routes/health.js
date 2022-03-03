@@ -46,7 +46,7 @@ const HealthModel = require('../models/health');
 
   //update route for health model
   router.put('/:id', (req, res, next) => {
-    HealthModel.find({clientId: req.params.id}, (error,data) => {
+    HealthModel.findOneAndUpdate({clientId: req.params.id}, {$set:req.body}, (error,data) => {
         if (error) {
           return next(error);
         } else if (data === null){
@@ -59,7 +59,7 @@ const HealthModel = require('../models/health');
 
   //delete route for health model
   router.delete('/:id', (req, res, next) => {
-    HealthModel.remove({ clientId: req.params.id }, (error, data) => {
+    HealthModel.deleteOne({ clientId: req.params.id }, (error, data) => {
         if (error) {
           return next(error);
         } else {
@@ -69,9 +69,9 @@ const HealthModel = require('../models/health');
     });
   });
 
-
+//delete route by healthId
 router.delete('/healthId/:id', (req, res, next) => {
-  HealthModel.remove({ _id: req.params.id }, (error, data) => {
+  HealthModel.deleteOne({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }

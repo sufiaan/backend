@@ -32,7 +32,7 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/:id', (req, res, next) => {
-    employmentModel.find({ clientId: req.params.id }, (error, data) => {
+    employmentModel.findOneAndUpdate({clientId: req.params.id}, {$set:req.body}, (error, data) => {
         if (error) {
             return next(error);
         }
@@ -47,7 +47,7 @@ router.get('/:id', (req, res, next) => {
 
 
 router.delete('/:id', (req, res, next) => {
-    employmentModel.remove({ clientId: req.params.id }, (error, data) => {
+    employmentModel.deleteOne({ clientId: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }
@@ -60,7 +60,7 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.delete('/employmentId/:id', (req, res, next) => {
-    employmentModel.remove({ _id: req.params.id }, (error, data) => {
+    employmentModel.deleteOne({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }
