@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000;
 const dotenv = require("dotenv");
+const axios = require("axios")
 dotenv.config();
 
 const mongoose = require("mongoose");  // Require mongoose library
@@ -103,6 +104,40 @@ app.get('/', (req, res) => {
   res.send('Welcome to Team 15\'s Index Page for the Project!')
 });
 
+
+const ClientModel = require('../backend/models/client');
+
 //external api implementation
+// this function grabs all data from the api
+app.get('/externalInfo/:id',async (req,res,next) => {
+  try {
+    ClientModel.find({ clientId: req.params.id }, (error, data) => {
+      if (error) {
+          return next(error);
+      }
+      else if (data === null) {
+          res.status(404).send('Client not found');
+      }
+      else {
+          externalApi("https://cis-4339.herokuapp.com/api/v1/data");
+      }
+    }).sort({ modifyAt: -1 }).limit(1);
+    } catch (err) {
+    res.status(500).json({ message: err });
+    console.log('error')
+    }
+   });
+
+function externalApi(path){
+  axios.get(path).then(
+    (response) => {
+      var results = response.data;
+      console.log(results);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
 // https://cis-4339.herokuapp.com/api/v1/data
-// https://cis-4339.herokuapp.com/api/v1/data/{{first_name}}/{{last_name}}/{{phone_number}}
+// https://cis-4339.herokuapp.com/api/v1/data/Fiona/Smith/987-3595-89
