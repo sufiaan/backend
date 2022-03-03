@@ -12,7 +12,7 @@ let eventSchema = new Schema({
     },
     //client Id entry for tying together
     clientId: {
-        type: Number,
+        type: Array,
         required: true
     },
     eventName: {

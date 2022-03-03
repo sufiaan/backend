@@ -1,15 +1,16 @@
 //import and load express app on a port we want to use
 const express = require('express')
 const app = express()
-const port = 8080;
+const port = 3000;
+const dotenv = require("dotenv");
+dotenv.config();
 
 const mongoose = require("mongoose");  // Require mongoose library
 
 // making our configuration file with an environment variable and requiring it
-require("dotenv").config();
 
-//mongoose connection
-mongoose.connect(process.env.Mongo_URL)
+
+
 //runs the connection request if successful
 
 //Load up our other libraries (mongoose for schema and morgan for logging help)
@@ -17,12 +18,12 @@ mongoose.connect(process.env.Mongo_URL)
 //Adding better logging functionality
 const morgan = require("morgan");
 
-// making our configuration file with an environment variable and requiring it
-require("dotenv").config();
 
-//mongoose connection
-mongoose.connect(process.env.Mongo_URL)
-  //runs the connection request if successful
+
+
+
+
+ 
 
 
 // Import cors module.
@@ -32,7 +33,7 @@ const cors = require('cors');
 //In the production systems, we should not hardcode the sensitive data like API Keys, 
 //Secret Tokens, etc directly within the codebase (based on the Twelve factor App method). 
 // We will pass them as environment variables. This module helps us to load environment variables from a .env file into process.env
-require("dotenv").config();   // Require the dotenv
+
 
 // setting up mongoose DB connection
 mongoose
@@ -48,7 +49,7 @@ mongoose
   });
 
 //Declare the port
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 //req.body
 app.use(express.json()); 
@@ -75,6 +76,9 @@ app.use('/employment', employment)
 const residence = require('./routes/residence')
 app.use('/residence', residence)
 
+//event router 
+const event = require('./routes/event')
+app.use('/event', event)
 
 //router family
 const family = require('./routes/family')
