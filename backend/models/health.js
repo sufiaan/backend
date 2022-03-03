@@ -33,7 +33,7 @@ let healthSchema = new Schema({
     },
     modifyAt:{
         type:Date,
-        required:Date.now
+        default:Date.now
     }
 },
     {
