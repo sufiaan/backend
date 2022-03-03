@@ -75,7 +75,21 @@ router.get('/lastname/:lastName', (req, res, next) => {
 });
 
 
-
+//update route for ClientModel model
+router.put('/:id', (req, res, next) => {
+    ClientModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('ClientModel info not found');
+        } else {
+            res.send('ClientModel is edited via PUT');
+            console.log('ClientModel successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
 
 
 // DELETE: an endpoint to delete a client by client ID and modify time.

@@ -102,3 +102,7 @@ app.get('/', (req, res) => {
   //we will send a string back
   res.send('Welcome to Team 15\'s Index Page for the Project!')
 });
+
+//external api implementation
+// https://cis-4339.herokuapp.com/api/v1/data
+// https://cis-4339.herokuapp.com/api/v1/data/{{first_name}}/{{last_name}}/{{phone_number}}
