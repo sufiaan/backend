@@ -6,10 +6,7 @@ const Schema = mongoose.Schema;
 //define schema
 let incomeSchema = new Schema({
     //good for assigning random value
-    _id: {
-        type: String,
-        default: uuid.v1
-    },
+    
     //client Id entry for tying together
     clientId: {
         type: Number,

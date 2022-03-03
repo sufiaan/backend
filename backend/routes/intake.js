@@ -46,7 +46,7 @@ const IntakeModel = require('../models/intake');
 
   //update route for intake model
   router.put('/:id', (req, res, next) => {
-    IntakeModel.find({clientId: req.params.id}, (error,data) => {
+    IntakeModel.findOneAndUpdate({clientId: req.params.id}, {$set:req.body}, (error,data) => {
         if (error) {
           return next(error);
         } else if (data === null){
@@ -59,7 +59,7 @@ const IntakeModel = require('../models/intake');
 
   //delete route for intake model
   router.delete('/:id', (req, res, next) => {
-    IntakeModel.remove({ clientId: req.params.id }, (error, data) => {
+    IntakeModel.deleteOne({ clientId: req.params.id }, (error, data) => {
         if (error) {
           return next(error);
         } else {
@@ -71,7 +71,7 @@ const IntakeModel = require('../models/intake');
 
 
 router.delete('/intakeId/:id', (req, res, next) => {
-      IntakeModel.remove({ _id: req.params.id }, (error, data) => {
+      IntakeModel.deleteOne({ _id: req.params.id }, (error, data) => {
         if (error) {
             return next(error);
         }
