@@ -52,7 +52,7 @@ const HealthModel = require('../models/health');
         } else if (data === null){
             res.status(404).send('health info not found');
         } else {
-          res.send(data,'health info is updated in the database');
+          res.send('health info is updated in the database');
         }
     }).sort({ modifyAt: -1});
   });
