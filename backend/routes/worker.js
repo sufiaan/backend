@@ -52,7 +52,7 @@ const WorkerModel = require('../models/worker');
         } else if (data === null){
             res.status(404).send('worker info not found');
         } else {
-          res.send(data,'worker info is updated in the database');
+          res.send('worker info is updated in the database');
         }
     }).sort({ modifyAt: -1});
   });

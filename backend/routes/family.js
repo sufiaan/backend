@@ -52,7 +52,7 @@ const FamilyModel = require('../models/family');
         } else if (data === null){
             res.status(404).send('Family info not found');
         } else {
-          res.send(data,'Family info is updated in the database');
+          res.send('Family info is updated in the database');
         }
     }).sort({ modifyAt: -1});
   });
