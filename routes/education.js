@@ -66,6 +66,21 @@ router.delete('/:id', (req, res, next) => {
     });
 });
 
+//update route for contactModel model
+router.put('/:id', (req, res, next) => {
+    educationModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('educationModel info not found');
+        } else {
+            res.send('educationModel is edited via PUT');
+            console.log('educationModel successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
 
 // DELETE: an endpoint to delete a client education by education id.
 router.delete('/educationId/:id', (req, res, next) => {
