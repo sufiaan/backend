@@ -49,6 +49,21 @@ router.get('/:id', (req, res, next) => {
     }).sort({ modifyAt: -1 });     // Only return the latest document
 });
 
+//update route for educationModel model
+router.put('/:id', (req, res, next) => {
+    educationModel.findOneAndUpdate({clientId: req.params.id}, {
+        $set: req.body
+      }, (error,data) => {
+        if (error) {
+          return next(error);
+        } else if (data === null){
+            res.status(404).send('educationModel info not found');
+        } else {
+            res.send('educationModel is edited via PUT');
+            console.log('educationModel successfully updated!', data)
+        }
+    }).sort({ modifyAt: -1});
+  });
 
 // DELETE: an endpoint to delete a client education by client id .
 router.delete('/:id', (req, res, next) => {

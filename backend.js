@@ -109,33 +109,39 @@ const ClientModel = require('../backend/models/client');
 
 //external api implementation
 // this function grabs all data from the api
-app.get('/externalInfo/:id',async (req,res,next) => {
+app.get('/externalInfo/:id', (req,res,next) => {
   try {
-    ClientModel.find({ clientId: req.params.id }, (error, data) => {
+     ClientModel.find({ clientId: req.params.id }, (error, data) => {
       if (error) {
           return next(error);
       }
-      else if (data === null) {
+      else if (Object.keys(data).length === 0) { //https://bobbyhadz.com/blog/javascript-check-if-object-is-empty
           res.status(404).send('Client not found');
       }
       else {
-          externalApi("https://cis-4339.herokuapp.com/api/v1/data");
+        console.log('Client found, matching information in external API......' , data);
+        var url = `https://cis-4339.herokuapp.com/api/v1/data/${data[0].firstName}/${data[0].lastName}/${data[0].phoneNumber}`
+          externalApi(url, res);
+          
       }
     }).sort({ modifyAt: -1 }).limit(1);
     } catch (err) {
     res.status(500).json({ message: err });
-    console.log('error')
+    console.log('error') 
     }
    });
 
-function externalApi(path){
+function externalApi(path,res){
   axios.get(path).then(
     (response) => {
       var results = response.data;
+      res.status(200).json(response.data);
       console.log(results);
     },
     (error) => {
+      res.status(500).json({ message: error });
       console.log(error);
+      console.log('Could not find client in external API' );
     }
   );
 }
